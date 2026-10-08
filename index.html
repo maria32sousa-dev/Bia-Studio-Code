@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bia Studio Code — desenvolvimento de sites modernos, responsivos e criativos." />
+  <title>Bia Studio Code | Desenvolvimento de Sites</title>
+  <link rel="icon" href="logotipo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#05050d;
+      --surface:#0b0b18;
+      --surface-2:#111027;
+      --text:#f7f7ff;
+      --muted:#a7a7bd;
+      --cyan:#16c9ff;
+      --blue:#437cff;
+      --purple:#7628ff;
+      --pink:#b42cff;
+      --line:rgba(255,255,255,.10);
+      --glow:0 0 55px rgba(91,53,255,.23);
+      --radius:22px;
+      --max:1160px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(118,40,255,.20), transparent 27rem),
+        radial-gradient(circle at 90% 26%, rgba(22,201,255,.11), transparent 25rem),
+        var(--bg);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .nav{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(18px);
+      background:rgba(5,5,13,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand img{width:170px;height:auto;object-fit:contain}
+    .links{display:flex;align-items:center;gap:28px;font-size:.93rem;color:#d8d8e7}
+    .links a{transition:.2s}
+    .links a:hover{color:var(--cyan)}
+    .nav-cta,.btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      border:1px solid rgba(69,199,255,.35);
+      border-radius:999px;padding:12px 19px;font-weight:700;
+      background:linear-gradient(135deg,rgba(118,40,255,.95),rgba(22,201,255,.95));
+      box-shadow:0 10px 30px rgba(65,76,255,.22);
+      transition:transform .2s,box-shadow .2s;
+    }
+    .nav-cta:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 15px 38px rgba(65,76,255,.34)}
+    .menu{display:none;background:none;border:0;color:white;font-size:1.6rem;cursor:pointer}
+
+    .hero{padding:110px 0 95px;position:relative}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:65px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 12px;border:1px solid rgba(118,40,255,.35);
+      border-radius:999px;background:rgba(118,40,255,.08);
+      color:#cfc9ff;font-size:.82rem;font-weight:700;margin-bottom:22px;
+    }
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 13px var(--cyan)}
+    h1{
+      font-family:"Space Grotesk",sans-serif;
+      font-size:clamp(2.8rem,6vw,5.5rem);line-height:.98;letter-spacing:-.055em;
+      max-width:760px;
+    }
+    .gradient{background:linear-gradient(100deg,#fff 12%,#9c78ff 45%,#18d7ff 82%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{color:var(--muted);font-size:1.1rem;max-width:620px;margin:25px 0 32px}
+    .hero-credit{margin-top:18px;color:#8f8fa6;font-size:.82rem}.hero-credit strong{color:#d9d9ee}
+    .actions{display:flex;gap:13px;flex-wrap:wrap}
+    .btn.secondary{background:rgba(255,255,255,.045);border-color:var(--line);box-shadow:none}
+    .btn.secondary:hover{border-color:rgba(22,201,255,.35)}
+    .hero-logo{
+      position:relative;display:grid;place-items:center;min-height:430px;
+      border:1px solid var(--line);border-radius:32px;
+      background:linear-gradient(145deg,rgba(118,40,255,.12),rgba(22,201,255,.04));
+      box-shadow:var(--glow);overflow:hidden;
+    }
+    .hero-logo:before,.hero-logo:after{
+      content:"";position:absolute;border-radius:50%;filter:blur(3px);pointer-events:none
+    }
+    .hero-logo:before{width:260px;height:260px;background:rgba(118,40,255,.20);top:-100px;right:-80px}
+    .hero-logo:after{width:220px;height:220px;background:rgba(22,201,255,.13);bottom:-100px;left:-70px}
+    .hero-logo img{width:min(76%,390px);position:relative;z-index:1;filter:drop-shadow(0 20px 35px rgba(88,54,255,.22))}
+
+    section{padding:92px 0}
+    .section-head{max-width:700px;margin-bottom:42px}
+    .kicker{color:#72dfff;text-transform:uppercase;letter-spacing:.18em;font-size:.76rem;font-weight:800}
+    h2{font-family:"Space Grotesk";font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;margin-top:10px}
+    .section-head p{color:var(--muted);margin-top:14px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      padding:28px;border:1px solid var(--line);border-radius:var(--radius);
+      background:linear-gradient(150deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+      transition:.25s;position:relative;overflow:hidden
+    }
+    .card:hover{transform:translateY(-6px);border-color:rgba(118,40,255,.4);box-shadow:var(--glow)}
+    .icon{
+      width:48px;height:48px;display:grid;place-items:center;border-radius:14px;
+      background:linear-gradient(135deg,rgba(118,40,255,.25),rgba(22,201,255,.18));
+      border:1px solid rgba(118,40,255,.28);font-size:1.3rem;margin-bottom:20px
+    }
+    .card h3{font-family:"Space Grotesk";font-size:1.22rem;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:.94rem}
+
+    .process{background:linear-gradient(180deg,transparent,rgba(118,40,255,.035),transparent)}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .step{padding:24px;border-top:1px solid rgba(118,40,255,.4)}
+    .num{font-family:"Space Grotesk";font-size:.8rem;color:#70dfff;margin-bottom:18px}
+    .step h3{margin-bottom:7px}.step p{color:var(--muted);font-size:.9rem}
+
+    .work{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .project{
+      min-height:270px;border:1px solid var(--line);border-radius:var(--radius);
+      padding:28px;display:flex;flex-direction:column;justify-content:flex-end;
+      background:
+        linear-gradient(145deg,rgba(118,40,255,.19),rgba(22,201,255,.06) 55%,rgba(255,255,255,.02)),
+        var(--surface);
+      overflow:hidden;position:relative
+    }
+    .project:nth-child(2){background:linear-gradient(145deg,rgba(22,201,255,.15),rgba(118,40,255,.08) 60%,rgba(255,255,255,.02)),var(--surface)}
+    .project:before{content:"</>";position:absolute;right:28px;top:18px;font:700 5rem "Space Grotesk";color:rgba(255,255,255,.045)}
+    .project small{color:#7edfff;text-transform:uppercase;letter-spacing:.13em;font-weight:700}
+    .project h3{font-family:"Space Grotesk";font-size:1.65rem;margin:7px 0 5px}
+    .project p{color:var(--muted)}
+    .project-tag{display:inline-flex;width:max-content;margin-top:17px;padding:6px 10px;border:1px solid rgba(22,201,255,.22);border-radius:999px;color:#a9eaff;background:rgba(22,201,255,.06);font-size:.72rem;font-weight:700}
+
+    .contact{
+      border:1px solid var(--line);border-radius:30px;padding:52px;
+      background:radial-gradient(circle at 80% 20%,rgba(22,201,255,.11),transparent 25rem),
+                 linear-gradient(135deg,rgba(118,40,255,.13),rgba(255,255,255,.02));
+      display:flex;justify-content:space-between;gap:35px;align-items:center
+    }
+    .contact p{color:var(--muted);max-width:620px;margin-top:10px}
+    footer{padding:35px 0 50px;color:#85859b;border-top:1px solid var(--line);margin-top:92px}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.86rem}
+    .mini-brand{color:#dcdcf0;font-weight:700}
+
+
+    .contact-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .developer{color:#85859b;font-size:.8rem;margin-top:4px}
+    .socials{display:flex;gap:16px;color:#bcbcd0}
+    .socials a:hover{color:var(--cyan)}
+    @media (max-width: 850px){
+      .links{display:none;position:absolute;left:20px;right:20px;top:78px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(8,8,19,.96);flex-direction:column;align-items:stretch}
+      .links.open{display:flex}.links a{padding:8px 4px}.nav-cta{display:none}.menu{display:block}
+      .hero{padding-top:72px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero-logo{min-height:330px}
+      .cards{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.work{grid-template-columns:1fr}
+      .contact{flex-direction:column;align-items:flex-start;padding:35px}.contact-actions{justify-content:flex-start}
+    }
+    @media (max-width: 520px){
+      .container{width:min(calc(100% - 28px),var(--max))}
+      .nav-inner{height:70px}.links{top:70px;left:14px;right:14px}
+      .brand img{width:145px}.hero{padding:58px 0 65px}
+      .hero p{font-size:1rem}.hero-logo{min-height:270px;border-radius:24px}
+      section{padding:68px 0}.steps{grid-template-columns:1fr}
+      .contact{border-radius:22px}.footer-inner{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio" aria-label="Bia Studio Code">
+        <img src="logotipo.png" alt="Bia Studio Code">
+      </a>
+      <div class="links" id="navLinks">
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Processo</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <a class="nav-cta" href="#contato">Vamos criar →</a>
+      <button class="menu" id="menu" aria-label="Abrir menu">☰</button>
+    </div>
+  </nav>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> DESENVOLVIMENTO WEB CRIATIVO</div>
+          <h1>Sites que transformam <span class="gradient">ideias em presença digital.</span></h1>
+          <p>A Beatriz, da Bia Studio Code, une design e código para criar sites modernos, rápidos, responsivos e com a identidade da sua marca.</p>
+          <div class="actions">
+            <a class="btn" href="#contato">Começar um projeto ✦</a>
+            <a class="btn secondary" href="#servicos">Conhecer serviços</a>
+          </div>
+          <div class="hero-credit">Desenvolvedora: <strong>Beatriz</strong> · Sites, landing pages e experiências digitais.</div>
+        </div>
+        <div class="hero-logo">
+          <img src="logotipo.png" alt="Logotipo Bia Studio Code">
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">O que eu faço</span>
+          <h2>Desenvolvimento pensado para destacar sua marca.</h2>
+          <p>Do primeiro layout ao site publicado, cada detalhe é criado para unir estética, funcionalidade e uma boa experiência em qualquer tela.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><div class="icon">&lt;/&gt;</div><h3>Sites personalizados</h3><p>Projetos únicos, sem aparência de template, feitos de acordo com seu objetivo e identidade visual.</p></article>
+          <article class="card"><div class="icon">⌁</div><h3>Design responsivo</h3><p>Layouts adaptados para celular, tablet e computador, com navegação simples e confortável.</p></article>
+          <article class="card"><div class="icon">⚡</div><h3>Performance</h3><p>Código organizado e experiências leves para que seu site carregue rápido e funcione bem.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="processo">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Como funciona</span>
+          <h2>Da ideia ao lançamento.</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="num">01 / BRIEFING</div><h3>Entender</h3><p>Objetivos, público, referências e personalidade da marca.</p></div>
+          <div class="step"><div class="num">02 / DESIGN</div><h3>Criar</h3><p>Estrutura visual, tipografia, cores e experiência de navegação.</p></div>
+          <div class="step"><div class="num">03 / CODE</div><h3>Desenvolver</h3><p>Transformação do design em um site funcional e responsivo.</p></div>
+          <div class="step"><div class="num">04 / LAUNCH</div><h3>Publicar</h3><p>Revisões finais e preparação para colocar seu projeto no ar.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Portfólio</span>
+          <h2>Projetos feitos para diferentes marcas.</h2>
+          <p>Uma seleção de projetos-conceito para mostrar como a Bia Studio Code pode transformar diferentes ideias em experiências digitais.</p>
+        </div>
+        <div class="work">
+          <article class="project">
+            <small>01 · Landing page</small>
+            <h3>Glow Beauty</h3>
+            <p>Landing page moderna para uma marca de cosméticos, com foco em produtos e conversão.</p>
+            <span class="project-tag">Design + Desenvolvimento</span>
+          </article>
+          <article class="project">
+            <small>02 · Site institucional</small>
+            <h3>Nova Arquitetura</h3>
+            <p>Site elegante para apresentar serviços, projetos e identidade de um escritório criativo.</p>
+            <span class="project-tag">Responsivo + UI</span>
+          </article>
+          <article class="project">
+            <small>03 · Página comercial</small>
+            <h3>Burger House</h3>
+            <p>Página visual para restaurante, com cardápio, informações e chamada para pedido.</p>
+            <span class="project-tag">Mobile First</span>
+          </article>
+          <article class="project">
+            <small>04 · Portfólio pessoal</small>
+            <h3>Creative Portfolio</h3>
+            <p>Portfólio profissional para apresentar trabalhos, habilidades e formas de contato.</p>
+            <span class="project-tag">HTML + CSS + JS</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="contact">
+          <div>
+            <span class="kicker">Vamos conversar</span>
+            <h2>Seu próximo site começa com uma ideia.</h2>
+            <p>Conte o que você quer criar e vamos transformar sua ideia em uma experiência digital bonita, funcional e com a sua cara.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="btn" href="https://wa.me/5514998932346" target="_blank" rel="noopener">WhatsApp →</a>
+            <a class="btn secondary" href="https://www.instagram.com/imaria_beatriz/" target="_blank" rel="noopener">Instagram @imaria_beatriz</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div class="mini-brand">Bia Studio Code</div>
+        <div class="developer">Desenvolvido por <strong>Beatriz</strong> · Web Developer</div>
+      </div>
+      <div class="socials">
+        <a href="https://wa.me/5514998932346" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/imaria_beatriz/" target="_blank" rel="noopener">@imaria_beatriz</a>
+      </div>
+      <div>© <span id="year"></span> Bia Studio Code.</div>
+    </div>
+  </footer>
+
+  <script>
+    const menu = document.getElementById('menu');
+    const links = document.getElementById('navLinks');
+    menu.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
